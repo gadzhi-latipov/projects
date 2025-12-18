@@ -1,3 +1,7 @@
+// Эффект при скролле проектов
+let lastScrollY = 0;
+let ticking = false;
+
 // Плавное появление элементов при скролле
 const fadeElements = document.querySelectorAll('.fade-in');
 
@@ -146,3 +150,102 @@ if (enableSoundEffects) {
         });
     });
 }
+
+function updateProjectsOnScroll() {
+    const projects = document.querySelectorAll('.full-width-project');
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    
+    projects.forEach(project => {
+        const rect = project.getBoundingClientRect();
+        const projectTop = rect.top;
+        const projectBottom = rect.bottom;
+        
+        // Если проект в области видимости
+        if (projectTop < windowHeight && projectBottom > 0) {
+            const visiblePercent = Math.min(100, Math.max(0, 
+                ((windowHeight - projectTop) / (projectBottom - projectTop)) * 100
+            ));
+            
+            // Эффект параллакса
+            project.style.transform = `translateX(${visiblePercent * 0.1}px)`;
+            
+            // Эффект свечения при попадании в центр экрана
+            const centerThreshold = windowHeight / 2;
+            const distanceFromCenter = Math.abs(rect.top + rect.height/2 - centerThreshold);
+            const intensity = Math.max(0, 1 - distanceFromCenter / centerThreshold);
+            
+            if (intensity > 0.3) {
+                project.style.boxShadow = `0 0 ${30 * intensity}px rgba(255, 255, 255, 0.2)`;
+            } else {
+                project.style.boxShadow = 'none';
+            }
+        }
+    });
+    
+    lastScrollY = scrollY;
+}
+
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            updateProjectsOnScroll();
+            ticking = false;
+        });
+        ticking = true;
+    }
+});
+
+// Эффект при наведении на проекты
+document.querySelectorAll('.full-width-project').forEach(project => {
+    project.addEventListener('mouseenter', function() {
+        const color = getComputedStyle(this.querySelector('.status-dot')).color;
+        this.style.borderLeftWidth = '10px';
+        this.style.borderLeftColor = color;
+        
+        // Эффект усиления анимации
+        const beforeElement = this.querySelector('.project-inner')?.parentElement;
+        if (beforeElement) {
+            beforeElement.style.animationDuration = '0.5s';
+            setTimeout(() => {
+                beforeElement.style.animationDuration = '';
+            }, 500);
+        }
+    });
+    
+    project.addEventListener('mouseleave', function() {
+        this.style.borderLeftWidth = '5px';
+    });
+});
+
+// Анимация при клике на проект
+document.querySelectorAll('.full-width-project').forEach(project => {
+    project.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A' || e.target.closest('a')) return;
+        
+        this.style.transform = 'translateX(10px) scale(1.01)';
+        setTimeout(() => {
+            this.style.transform = '';
+        }, 300);
+        
+        // Эффект пульсации
+        const indicator = this.querySelector('.status-dot');
+        if (indicator) {
+            indicator.style.transform = 'scale(1.5)';
+            setTimeout(() => {
+                indicator.style.transform = 'scale(1)';
+            }, 300);
+        }
+    });
+});
+
+// Эффект постепенного появления проектов при загрузке
+window.addEventListener('load', function() {
+    const projects = document.querySelectorAll('.full-width-project');
+    projects.forEach((project, index) => {
+        setTimeout(() => {
+            project.style.opacity = '1';
+            project.style.transform = 'translateY(0)';
+        }, index * 200);
+    });
+});
