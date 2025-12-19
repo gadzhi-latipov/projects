@@ -723,13 +723,13 @@ body {
     border: 1px solid currentColor;
     text-transform: uppercase;
     text-align: center;
-    width: 100%;
+    width: 40%;
 }
 
 /* Панель требований */
 .requirements-elegant {
     text-align: center;
-    max-width: 900px;
+    max-width: 600px;
     margin: 0 auto;
     background: rgba(0, 0, 0, 0.4);
     padding: 30px;
@@ -1226,10 +1226,10 @@ body {
     color: #dc3545; /* Красный */
   }
 
-     /* АДАПТИРОВАННОЕ ПРИВЕТСТВИЕ */
+/* АДАПТИРОВАННОЕ ПРИВЕТСТВИЕ */
     
 
-        .greeting-cyber::before {
+    .greeting-cyber::before {
             content: '';
             position: absolute;
             top: 0;
@@ -1243,7 +1243,7 @@ body {
             z-index: -1;
         }
 
-        .greeting-line {
+     .greeting-line {
             font-family: var(--font-body);
             font-size: 1.8rem;
             line-height: 1.8;
@@ -1253,7 +1253,7 @@ body {
             padding-left: 20px;
         }
 
-        .greeting-line::before {
+     .greeting-line::before {
             content: '▸';
             position: absolute;
             left: 0;
@@ -1261,28 +1261,28 @@ body {
             font-size: 1.2rem;
         }
 
-        .greeting-accent {
+     .greeting-accent {
             color: var(--accent-green);
             font-weight: 700;
             text-shadow: 0 0 10px rgba(0, 255, 170, 0.5);
             animation: textPulse 3s infinite alternate;
         }
 
-        .greeting-highlight {
+    .greeting-highlight {
             color: var(--primary-blue);
             font-weight: 600;
             border-bottom: 1px solid rgba(0, 224, 255, 0.3);
             padding-bottom: 2px;
         }
 
-        .greeting-cta {
+    .greeting-cta {
             text-align: center;
             margin-top: 40px;
             padding-top: 30px;
             border-top: 1px solid rgba(0, 255, 170, 0.2);
         }
 
-        .cta-text {
+    .cta-text {
             font-family: var(--font-heading);
             font-size: 1.5rem;
             color: var(--accent-yellow);
@@ -1291,12 +1291,12 @@ body {
             animation: ctaGlow 2s infinite alternate;
         }
 
-        @keyframes textPulse {
+    @keyframes textPulse {
             0% { opacity: 0.8; }
             100% { opacity: 1; text-shadow: 0 0 15px rgba(0, 255, 170, 0.7); }
         }
 
-        @keyframes ctaGlow {
+     @keyframes ctaGlow {
             0% { 
                 color: var(--accent-yellow);
                 text-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
@@ -1308,3 +1308,29 @@ body {
                     0 0 25px rgba(0, 255, 170, 0.6);
             }
         }
+
+
+/* Видео метрос */
+.video-background {
+    position: fixed;
+    top: 0;
+    right: 0; /* Позиционируем с правого края */
+    width: 30%; /* Занимаем только половину ширины */
+    height: 100%;
+    z-index: -100;
+    overflow: hidden;
+}
+
+.video-background video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    opacity: 0.1; 
+    /* Прозрачность видео (0.7 = 70% видимости) */
+}
+
+
