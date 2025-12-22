@@ -331,7 +331,9 @@
                        Суть проекта -  Веб сервис позволяющий находить попутчиков в метро.
                     </p>
                     <div class="project-status">Статус готовности: 100%</a></div>
-                    <div style="margin: 25px 0; display: flex; justify-content: center;">
+
+                     <!-- Пульсирующая кнопка перехода на внещний САЙТ -->
+                   <div style="margin: 25px 0; display: flex; justify-content: center;">
                         <a href="https://frommetro.vercel.app/" 
                         target="_blank"
                         style="display: inline-flex;
@@ -352,37 +354,63 @@
                                 transition: all 0.3s ease;
                                 position: relative;
                                 overflow: hidden;
-                                backdrop-filter: blur(10px);">
+                                backdrop-filter: blur(10px);
+                                animation: pulse 2s infinite;">
                             
                             <i class="fas fa-external-link-alt"></i>
                             <span>ПЕРЕЙТИ НА САЙТ МЕТРОС</span>
                             <div style="position: absolute;
-                                top: 0;
-                                left: -100%;
-                                width: 100%;
-                                height: 100%;
-                                background: linear-gradient(90deg, 
-                                        transparent, 
-                                        rgba(255, 255, 255, 0.2), 
-                                        transparent);
-                                transition: left 0.7s;"></div>
-                            </a>
-                        </div>
+                                        top: 0;
+                                        left: -100%;
+                                        width: 100%;
+                                        height: 100%;
+                                        background: linear-gradient(90deg, 
+                                                transparent, 
+                                                rgba(255, 255, 255, 0.2), 
+                                                transparent);
+                                        transition: left 0.7s;"></div>
+                        </a>
+                    </div>
 
-                        <style>
-                            a:hover {
-                                transform: translateY(-5px) scale(1.05);
+                    <!-- Анимация кнопки -->
+                    <style>
+                        @keyframes pulse {
+                            0% {
                                 box-shadow: 
-                                    0 0 40px rgba(0, 255, 136, 0.7),
-                                    0 10px 40px rgba(0, 0, 0, 0.3);
-                                letter-spacing: 3px;
-                                background: linear-gradient(135deg, #00ffaa, #00ee77);
+                                    0 0 30px rgba(2, 255, 61, 0.5),
+                                    0 0 0 0 rgba(142, 56, 46, 0.4);
                             }
-                            
-                            a:hover div {
-                                left: 100%;
+                            50% {
+                                box-shadow: 
+                                    0 0 80px rgba(70, 252, 10, 0.5),
+                                    0 0 0 15px rgba(0, 255, 136, 0);
                             }
-                        </style>
+                            100% {
+                                box-shadow: 
+                                    0 0 1330px rgba(0, 255, 136, 0.5),
+                                    0 0 0 10 rgba(247, 5, 5, 0);
+                            }
+                        }
+                        
+                        a {
+                            animation: pulse 1s infinite !important;
+                        }
+                        
+                        a:hover {
+                            transform: translateY(-5px) scale(1.05);
+                            box-shadow: 
+                                0 0 40px rgba(0, 255, 136, 0.7),
+                                0 10px 40px rgba(0, 0, 0, 0.3),
+                                0 0 0 10px rgba(0, 255, 136, 0.2) !important;
+                            letter-spacing: 3px;
+                            background: linear-gradient(135deg, #00ffaa, #00ee77);
+                            animation: normal !important; /*  пульсация при наведении */
+                        }
+                        
+                        a:hover div {
+                            left: 100%;
+                        }
+                    </style>
                     
                     <div class="requirements-elegant" style="color: #00ff88;">
                         <div class="req-title-elegant">
